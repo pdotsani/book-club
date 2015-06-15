@@ -53,11 +53,13 @@
         </tab>
         <tab heading="all books">
           <ul class="thumbnails" ng-repeat="book in books">
-                <div class="thumbnail">
-                  <img data-src="holder.js/300x200" alt="">
-                  <h3>{{book.name}}</h3>
-                  <p>{{book.desc}}</p>
-                </div>
+            <li class="col-md-4">
+              <div class="thumbnail">
+                <img data-src="holder.js/300x200" alt="">
+                <h3>{{book.name}}</h3>
+                <p>{{book.desc}}</p>
+              </div>
+            </li>
           </ul>
         </tab>
         <tab heading="add book">

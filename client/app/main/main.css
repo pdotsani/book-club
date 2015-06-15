@@ -1,3 +1,11 @@
-a.accordion-toggle {
-    cursor: pointer;
+a {
+	cursor: pointer !important;
+}
+
+ul.thumbnails {
+	margin-top: 20px;
+}
+
+ul.thumbnails > li {
+	list-style: none;
 }
