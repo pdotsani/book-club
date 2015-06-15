@@ -1,53 +1,69 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container-fluid">
-  <div class="row">
+
+  <div class="row" ng-hide="isLoggedIn()">
     <div class="col-md-6 col-md-offset-1">
       <h1>My Book Club</h1>
     </div>
+
     <div class="col-md-3">
       <accordion close-others="true">
         <accordion-group heading="Login" is-open="true">
-          <form>
+          <form name="loginForm"ng-submit="login(loginForm)">
             <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" class="form-control" id="username" placeholder="enter username">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="enter email" ng-model="user.email"equired>
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="enter password">
+              <input type="password" class="form-control" id="password" placeholder="enter password"ng-model="user.password"required>
             </div>
-            <button type=s"submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default">Submit</button>
           </form>
         </accordion-group>
+
         <accordion-group heading="Register">
           <form>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="enter email">
+              <input type="email" class="form-control" id="email" placeholder="enter email" required>
             </div>
             <div class="form-group">
               <label for="username">Username</label>
-              <input type="text" class="form-control" id="username" placeholder="enter username">
+              <input type="text" class="form-control" id="username" placeholder="enter username" required>
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="enter password">
-              <input type="password" class="form-control" id="password" placeholder="verify password">
+              <input type="password" class="form-control" id="password" placeholder="enter password" required>
+              <input type="password" class="form-control" id="password" placeholder="verify password" required>
             </div>
             <button type=s"submit" class="btn btn-default">Submit</button>
           </form>
         </accordion-group>
       </accordion>
-
     </div>
-  </div>  
-</div>
-
-<footer class="footer text-center">
-  <div class="container">
-      <p>Angular Fullstack v2.0.13 |
-        <a href="https://twitter.com/pdotsani">@pdotsani</a>
-      </p>
   </div>
-</footer>
+  
+  <div class="row" ng-show="isLoggedIn()">
+    <div class="col-md-6 col-md-offset-3">
+      <tabset>
+        <tab heading="my profile">
+          profile page
+        </tab>
+        <tab heading="all books">
+          <ul class="thumbnails" ng-repeat="book in books">
+                <div class="thumbnail">
+                  <img data-src="holder.js/300x200" alt="">
+                  <h3>{{book.name}}</h3>
+                  <p>{{book.desc}}</p>
+                </div>
+          </ul>
+        </tab>
+        <tab heading="add book">
+          add a book
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>
