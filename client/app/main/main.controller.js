@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bookClubApp')
-  .controller('MainCtrl', function ($scope, $window, $http, Auth) {
+  .controller('MainCtrl', function ($scope, $window, $http, Auth, $location) {
 
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;

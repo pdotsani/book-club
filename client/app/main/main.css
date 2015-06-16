@@ -1,11 +1,33 @@
 a {
 	cursor: pointer !important;
+	color: #555;
+}
+a:hover {
+	color: #555;
 }
 
-ul.thumbnails {
+/*TABS*/
+.nav-tabs > li {
+  width: 33.33%;
+  text-align: center;
+}
+
+.nav-tabs > li.active > a {
+	color: #1E824C !important;
+	border: 1px solid #67809F !important;
+  border-bottom-color: transparent !important;
+}
+
+/*THUMBNAILS*/
+
+ul.thumbnails, form {
 	margin-top: 20px;
 }
 
 ul.thumbnails > li {
 	list-style: none;
+}
+
+.thumbnail {
+  padding: 4px 20px;
 }
