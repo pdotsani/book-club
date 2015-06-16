@@ -13,7 +13,7 @@ a:hover {
 }
 
 .nav-tabs > li.active > a {
-	color: #1E824C !important;
+	color: #34495E !important;
 	border: 1px solid #67809F !important;
   border-bottom-color: transparent !important;
 }
@@ -30,4 +30,21 @@ ul.thumbnails > li {
 
 .thumbnail {
   padding: 4px 20px;
+}
+
+/*PANNELS*/
+
+.panel-default > .panel-heading {
+	color: white !important;
+	background-color: #67809F;
+	border-color: #67809F;
+}
+
+.panel-title > a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.panel-body label {
+	color: #34495E;
 }
