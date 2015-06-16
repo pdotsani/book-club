@@ -68,22 +68,22 @@
         <tab heading="add book">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <form ng-submit="addBook">
+              <form ng-submit="addBook()">
                 <div class="form-group">
                   <label for="bookName">Book Name</label>
-                  <input type="text" id="bookName" class="form-control" placeholder="enter book name">
+                  <input type="text" id="bookName" class="form-control" placeholder="enter book name" ng-model="bookData.name">
                 </div>
                 <div class="form-group">
                   <label for="bookAuthor">Book Author</label>
-                  <input type="text" id="bookAuthor" class="form-control" placeholder="enter book author">
+                  <input type="text" id="bookAuthor" class="form-control" placeholder="enter book author" ng-model="bookData.author">
                 </div>
                 <div class="form-group">
                   <label for="bookAuthor">Book Image</label>
-                  <input type="text" id="bookAuthor" class="form-control" placeholder="enter image url">
+                  <input type="text" id="bookAuthor" class="form-control" placeholder="enter image url" ng-model="bookData.img">
                 </div>
                 <div class="form-group">
                   <label for="bookDescription">Book Description</label>
-                  <textarea type="text" id="bookDescription" class="form-control" placeholder="enter description"></textarea>
+                  <textarea type="text" id="bookDescription" class="form-control" placeholder="enter description" ng-model="bookData.desc"></textarea>
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
               </form>

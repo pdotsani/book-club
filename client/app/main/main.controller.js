@@ -2,7 +2,7 @@
 
 angular.module('bookClubApp')
   .controller('MainCtrl', 
-    function ($scope, $window, $http, Auth, $location) {
+    function ($scope, $window, $http, Auth, $location, $route) {
 
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
@@ -21,10 +21,13 @@ angular.module('bookClubApp')
     });
 
     //Book model data from forum
-    $scope.bookName;
-    $scope.bookAuthor;
-    $scope.bookName;
-    $scope.bookDesc;
+    $scope.bookData = {
+      name:'',
+      author:'',
+      contributor:'',
+      desc:'',
+      img: ''
+    }
 
 
     $scope.login = function(form) {
@@ -72,17 +75,24 @@ angular.module('bookClubApp')
     };
 
     $scope.addBook = function() {
+      console.log($scope.bookData.name+","+
+        $scope.bookData.author+","+
+        $scope.bookData.desc+","+
+        $scope.getCurrentUser().name+","+
+        $scope.bookData.img
+      );
       $http.post('/api/books/', {
-        _id: $scope.bookName,
-        author: $scope.bookAuthor,
-        desc: $scope.bookDesc,
-        contributor: '',
-        image: $scope.bookImg
+        _id: $scope.bookData.name,
+        author: $scope.bookData.author,
+        desc: $scope.bookData.desc,
+        contributor: $scope.getCurrentUser().name,
+        image: $scope.bookData.img
       }).success(function(res){
         console.log(res + ' submitted!');
       }).error(function(err) {
         console.log(err);
       });
+      $route.reload();
     };
 
   });
