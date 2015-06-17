@@ -21,7 +21,7 @@ a:hover {
 /*THUMBNAILS*/
 
 ul.thumbnails, form {
-	margin-top: 20px;
+	margin-top: 15px;
 }
 
 ul.thumbnails > li {
@@ -29,15 +29,29 @@ ul.thumbnails > li {
 }
 
 .thumbnail {
-  padding: 4px 20px;
+  padding: 0px;
+}
+
+.thumbnail > h3, 
+.thumbnail > p {
+	padding: 0px 20px;
+}
+
+.thumbnail > h3 {
+	margin-bottom: 0;
 }
 
 /*PANNELS*/
+
+.panel-default {
+	border-color: transparent;
+}
 
 .panel-default > .panel-heading {
 	color: white !important;
 	background-color: #67809F;
 	border-color: #67809F;
+	border-radius: 3px;
 }
 
 .panel-title > a:hover {

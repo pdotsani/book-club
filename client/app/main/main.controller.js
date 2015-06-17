@@ -15,17 +15,15 @@ angular.module('bookClubApp')
     $scope.books;
     $http.get('/api/books/').success(function(res){
       $scope.books = res;
-      console.log($scope.books);
+      console.log("books loaded!");
     }).error(function(err){
       console.log(err);
     });
 
-    //Book model data from forum
+    //Book model data
     $scope.bookData = {
       name:'',
       author:'',
-      contributor:'',
-      desc:'',
       img: ''
     }
 
@@ -75,16 +73,9 @@ angular.module('bookClubApp')
     };
 
     $scope.addBook = function() {
-      console.log($scope.bookData.name+","+
-        $scope.bookData.author+","+
-        $scope.bookData.desc+","+
-        $scope.getCurrentUser().name+","+
-        $scope.bookData.img
-      );
       $http.post('/api/books/', {
         _id: $scope.bookData.name,
         author: $scope.bookData.author,
-        desc: $scope.bookData.desc,
         contributor: $scope.getCurrentUser().name,
         image: $scope.bookData.img
       }).success(function(res){

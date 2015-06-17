@@ -24,7 +24,7 @@
         </accordion-group>
 
         <accordion-group heading="Register">
-          <form>
+          <form name="regForm" ng-submit="register(regForm)">
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" class="form-control" id="email" placeholder="enter email" ng-model="user.email"required>
@@ -48,23 +48,26 @@
   <div class="row" ng-show="isLoggedIn()">
     <div class="col-md-6 col-md-offset-3">
       <tabset>
+
         <tab heading="my profile">
           <h3 class="text-center">{{getCurrentUser().name}}<br>
           <small>{{getCurrentUser().email}}</small></h3>
         </tab>
+
         <tab heading="all books">
-          <ul class="thumbnails" ng-repeat="book in books">
-            <li class="col-md-4">
+          <ul class="thumbnails">
+            <li class="col-sm-4" ng-repeat="book in books | orderBy: '_id'">
               <div class="thumbnail">
                 <img src="{{book.image}}" alt="">
-                <h3>{{book._id}}</h3>
-                <h3><small>{{book.author}}</small></h3>
+                <h3>{{book._id}}<br>
+                <small>{{book.author}}</small></h3>
                 <p>{{book.desc}}</p>
                 <p><small>submitted by {{book.contributor}}</small></p>
               </div>
             </li>
           </ul>
         </tab>
+
         <tab heading="add book">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -81,15 +84,12 @@
                   <label for="bookAuthor">Book Image</label>
                   <input type="text" id="bookAuthor" class="form-control" placeholder="enter image url" ng-model="bookData.img">
                 </div>
-                <div class="form-group">
-                  <label for="bookDescription">Book Description</label>
-                  <textarea type="text" id="bookDescription" class="form-control" placeholder="enter description" ng-model="bookData.desc"></textarea>
-                </div>
                 <button type="submit" class="btn btn-default">Submit</button>
               </form>
             </div>
           </div>
         </tab>
+
       </tabset>
     </div>
   </div>

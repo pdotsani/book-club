@@ -6,7 +6,6 @@ var mongoose = require('mongoose'),
 var BookSchema = new Schema({
   _id: String,
   author: String,
-  desc: String,
   contributor: String,
   image: String
 });
