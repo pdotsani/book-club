@@ -2,16 +2,36 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
-      <h1>Change Password</h1>
+    <div class="col-md-6 col-md-offset-3">
+      <h1>Change Profile</h1>
     </div>
-    <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+    <div class="col-md-6 col-md-offset-3">
+      <form name="profileForm" ng-submit="changeSettings(profileForm)">
 
         <div class="form-group">
-          <label>Current Password</label>
+          <label>Full Name</label>
+          <input type="text" name="fullName" class="form-control" ng-model="user.fullName">
+        </div>
+        
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" name="city" class="form-control" ng-model="user.city">
+        </div>
 
-          <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
+        <div class="form-group">
+          <label>State</label>
+          <input type="text" name="state" class="form-control" ng-model="user.state">
+        </div>
+
+        <button class="btn btn-default" type="submit">Change Profile</button>
+
+      </form>
+      <form class="form" name="passForm" ng-submit="changePassword(passForm)" novalidate>
+
+        <div class="form-group">
+          <label>Change Password</label>
+
+          <input type="password" name="password" class="form-control" ng-model="user.oldPassword"  placeholder="Current password"
                  mongoose-error/>
           <p class="help-block" ng-show="form.password.$error.mongoose">
               {{ errors.other }}
@@ -19,9 +39,7 @@
         </div>
 
         <div class="form-group">
-          <label>New Password</label>
-
-          <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
+          <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword" placeholder="New password"
                  ng-minlength="3"
                  required/>
           <p class="help-block"
@@ -32,7 +50,7 @@
 
         <p class="help-block"> {{ message }} </p>
 
-        <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+        <button class="btn btn-default" type="submit">Change Password</button>
       </form>
     </div>
   </div>

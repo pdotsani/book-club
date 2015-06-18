@@ -1,8 +1,23 @@
 'use strict';
 
 angular.module('bookClubApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', function ($http, $scope, $route, User, Auth, updateSettings) {
     $scope.errors = {};
+
+    $scope.changeSettings = function(form) {
+      console.log($scope.user.fullName + ":" + $scope.user.city + ":" + $scope.user.state);
+      
+      if($scope.user.city != undefined) updateSettings.city($scope.user.city);
+      if($scope.user.state != undefined) updateSettings.state($scope.user.state);
+      if($scope.user.fullName != undefined) updateSettings.fullname($scope.user.fullName);
+
+      // Clear fields
+      $scope.user.fullName = '';
+      $scope.user.city = '';
+      $scope.user.state = '';
+
+      $route.reload();
+    };
 
     $scope.changePassword = function(form) {
       $scope.submitted = true;
