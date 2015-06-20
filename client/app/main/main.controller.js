@@ -8,6 +8,7 @@ angular.module('bookClubApp')
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
     //User Variables
+    $scope.userLogin = {};
     $scope.user = {};
     $scope.errors = {};
 
@@ -33,8 +34,8 @@ angular.module('bookClubApp')
 
       if(form.$valid) {
         Auth.login({
-          email: $scope.user.email,
-          password: $scope.user.password
+          email: $scope.userLogin.email,
+          password: $scope.userLogin.password
         })
         .then( function() {
           // Logged in, redirect to home
@@ -44,6 +45,7 @@ angular.module('bookClubApp')
           $scope.errors.other = err.message;
         });
       }
+      $scope.userLogin = {};
     };
 
     $scope.register = function(form) {
@@ -70,6 +72,7 @@ angular.module('bookClubApp')
           });
         });
       }
+      $scope.user = {};
     };
 
     $scope.addBook = function() {
