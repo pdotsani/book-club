@@ -11,15 +11,19 @@ angular.module('bookClubApp')
     $scope.userLogin = {};
     $scope.user = {};
     $scope.errors = {};
+    $scope.books = {};
 
-    //Get books from db
-    $scope.books;
-    $http.get('/api/books/').success(function(res){
-      $scope.books = res;
-      console.log("books loaded!");
-    }).error(function(err){
-      console.log(err);
-    });
+    $scope.loadBooks = function () {
+      $http.get('/api/books/').success(function(res){
+        $scope.books = res;
+        console.log("books loaded!");
+      }).error(function(err){
+        console.log(err);
+      });
+    }
+
+    //Alert object
+    $scope.alerts=[];
 
     //Book model data
     $scope.bookData = {
@@ -27,6 +31,15 @@ angular.module('bookClubApp')
       author:'',
       img: ''
     }
+
+    //Alert functions
+    $scope.bookAddAlert = function() {
+      $scope.alerts.push({type: 'success', msg: $scope.bookData.name+' added!'});
+      console.log(alerts);
+    };
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+    };
 
 
     $scope.login = function(form) {
@@ -82,11 +95,21 @@ angular.module('bookClubApp')
         contributor: $scope.getCurrentUser().name,
         image: $scope.bookData.img
       }).success(function(res){
+        $scope.alerts.push({type: 'success', msg: $scope.bookData.name+' added!'});
         console.log(res + ' submitted!');
+        //Reset scope variable
+        $scope.bookData = {
+          name:'',
+          author:'',
+          img: ''
+        }
       }).error(function(err) {
         console.log(err);
       });
-      $route.reload();
+      $scope.loadBooks();
     };
+
+    //Login load: Get books from db
+    $scope.loadBooks();
 
   });
