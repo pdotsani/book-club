@@ -1,30 +1,41 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="container-fluid">  
+<div class="container-fluid">
+
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
       <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
     </div>
   </div>
 
-  <div class="row" ng-show="isLoggedIn()">
+  <div class="row">
+
     <div class="col-md-8 col-md-offset-2">
+
       <tabset class="tab-animation">
 
         <tab heading="my profile">
           <div class="text-center">
             <h3>{{getCurrentUser().name}}<br>
-            <small>{{getCurrentUser().email}}</small></h3>
+              <small>{{getCurrentUser().email}}</small>
+            </h3>
             <h4>{{getCurrentUser().fullname}}</h4>
-            <h4>{{getCurrentUser().city}}, {{getCurrentUser().state}}</h4>
+            <h4 ng-show="getCurrentUser().city || getCurrentUser().state">{{getCurrentUser().city}}, {{getCurrentUser().state}}</h4>
           </div>
         </tab>
 
         <tab heading="all books">
-          <ul class="thumbnails">
-            <li class="col-sm-4" ng-repeat="book in books | orderBy: '_id'">
+          <h1
+            class="text-center"
+            ng-hide="books.length > 0">No books uploaded!</h1>
+          <ul
+            class="thumbnails"
+            ng-show="books.length > 0">
+            <li
+              class="col-sm-4"
+              ng-repeat="book in books | orderBy: '_id'">
               <div class="thumbnail">
-                <img src="{{book.image}}" alt="">
+                <img src="{{book.image}}">
                 <h3>{{book._id}}<br>
                 <small>{{book.author}}</small></h3>
                 <p>{{book.desc}}</p>
@@ -57,6 +68,8 @@
         </tab>
 
       </tabset>
+
     </div>
   </div>
+
 </div>

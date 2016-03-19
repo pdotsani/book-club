@@ -1,32 +1,44 @@
 'use strict';
 
 angular.module('bookClubApp')
-  .controller('SettingsCtrl', function ($http, $scope, $route, User, Auth, updateSettings) {
+  .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
+    $scope.user = {};
 
-    $scope.changeSettings = function(form) {
-      console.log($scope.user.fullName + ":" + $scope.user.city + ":" + $scope.user.state);
+    $scope.updateProfile = function(form) {
+      $scope.submitted = true;
+
+      console.log($scope.user.fullName + 
+        ':' + $scope.user.city + 
+        ':' + $scope.user.state);
       
-      if($scope.user.city != undefined) updateSettings.city($scope.user.city);
-      if($scope.user.state != undefined) updateSettings.state($scope.user.state);
-      if($scope.user.fullName != undefined) updateSettings.fullname($scope.user.fullName);
+      var obj = {};
+      // Run user service... only submit if value exists
+      obj.city = $scope.user.city 
+        ? $scope.user.city : delete obj.city;
+      obj.state = $scope.user.state 
+        ? $scope.user.state : delete obj.state;
+      obj.fullName = $scope.user.fullName 
+        ? $scope.user.fullName : delete obj.fullName;
 
-      // Clear fields
-      $scope.user.fullName = '';
-      $scope.user.city = '';
-      $scope.user.state = '';
-
-      $route.reload();
+      User.update(obj, function() {
+        $scope.user = {};
+        $scope.password.message = 'Profile Updated!';
+      }).catch(function(err) {
+        console.warn(err);
+      });
     };
 
     $scope.changePassword = function(form) {
       $scope.submitted = true;
       if(form.$valid) {
-        Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
-        .then( function() {
-          $scope.message = 'Password successfully changed.';
+        Auth.changePassword(
+          $scope.user.oldPassword, 
+          $scope.user.newPassword)
+        .then(function() {
+          $scope.password.message = 'Password changed!';
         })
-        .catch( function() {
+        .catch(function() {
           form.password.$setValidity('mongoose', false);
           $scope.errors.other = 'Incorrect password';
           $scope.message = '';

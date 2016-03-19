@@ -1,6 +1,8 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<div
+  ng-include="'components/navbar/navbar.html'"
+  ng-show="isLoggedIn()"></div>
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top:100px;">
 
   <div class="row" ng-hide="isLoggedIn()">
     <div class="col-md-6 col-md-offset-1">

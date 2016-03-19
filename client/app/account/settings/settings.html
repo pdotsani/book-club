@@ -6,7 +6,12 @@
       <h1>Change Profile</h1>
     </div>
     <div class="col-md-6 col-md-offset-3">
-      <form name="profileForm" ng-submit="changeSettings(profileForm)">
+      <form 
+        name="profileForm" 
+        ng-submit="updateProfile(profileForm)"
+        novalidate>
+
+        <p class="help-block"> {{ profile.message }} </p>
 
         <div class="form-group">
           <label>Full Name</label>
@@ -23,10 +28,16 @@
           <input type="text" name="state" class="form-control" ng-model="user.state">
         </div>
 
-        <button class="btn btn-default" type="submit">Change Profile</button>
-
+        <button
+          class="btn btn-default"
+          type="submit">Update</button>
       </form>
-      <form class="form" name="passForm" ng-submit="changePassword(passForm)" novalidate>
+
+      <form
+        class="form"
+        name="passForm"
+        ng-submit="changePassword(passForm)"
+        novalidate>
 
         <div class="form-group">
           <label>Change Password</label>
@@ -48,10 +59,13 @@
           </p>
         </div>
 
-        <p class="help-block"> {{ message }} </p>
+        <p class="help-block"> {{ password.message }} </p>
 
-        <button class="btn btn-default" type="submit">Change Password</button>
+        <button
+          class="btn btn-default"
+          type="submit">Change</button>
       </form>
+
     </div>
   </div>
 </div>

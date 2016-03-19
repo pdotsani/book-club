@@ -79,44 +79,16 @@ exports.changePassword = function(req, res, next) {
   });
 };
 
-/* Change user setting city */
-exports.changeCity = function(req, res, next) {
-  var userId = req.params.id;
-  var newCity = req.params.city;
+/* Change profile properties */
+exports.update = function(req, res, next) {
+  var userId = req.body.id;
+  var newCity = req.body.city;
+  var newState = req.body.state;
+  var newFullName = req.body.fullName;
 
   User.findById(userId, function (err, user) {    
       user.city = newCity;
       user.markModified('city');
-      user.save(function(err) {
-        if (err) return validationError(res, err);
-        return res.send(200, user);
-      });
-  });
-};
-
-/* Change user setting state */
-exports.changeState = function(req, res, next) {
-  var userId = req.params.id;
-  var newState = req.params.state;
-
-  User.findById(userId, function (err, user) {    
-      user.state = newState;
-      user.markModified('state');
-      user.save(function(err) {
-        if (err) return validationError(res, err);
-        return res.send(200, user);
-      });
-  });
-};
-
-/* Change user setting fullName */
-exports.changeFullName = function(req, res, next) {
-  var userId = req.params.id;
-  var newName = req.params.fName;
-
-  User.findById(userId, function (err, user) {    
-      user.fullname = newName;
-      user.markModified('fullname');
       user.save(function(err) {
         if (err) return validationError(res, err);
         return res.send(200, user);

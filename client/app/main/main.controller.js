@@ -4,7 +4,7 @@ angular.module('bookClubApp')
   .controller('MainCtrl', 
     function ($scope, Auth, $location) {
 
-    $scope.isLoggedIn = Auth.isLoggedIn();  
+    $scope.isLoggedIn = Auth.isLoggedIn;  
     $scope.user = {};
     $scope.regUser = {};
     $scope.errors = {};
