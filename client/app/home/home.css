@@ -1,0 +1,94 @@
+a {
+	cursor: pointer !important;
+	color: #555;
+}
+a:hover {
+	color: #555;
+}
+
+/*TABS*/
+.nav-tabs > li {
+  width: 33.33%;
+  text-align: center;
+}
+
+.nav-tabs > li.active > a {
+	color: #34495E !important;
+	border: 1px solid #67809F !important;
+  border-bottom-color: transparent !important;
+}
+
+/*ANIMATION TABS begin*/
+/* set reference point */
+.tab-animation > .tab-content {
+    position: relative;
+}
+
+/* set animate effect */
+.tab-animation > .tab-content > .tab-pane{
+    transition: 0.2s linear opacity;
+}
+
+/* overwrite display: none and remove from document flow */
+.tab-animation > .tab-content > .tab-pane.active-remove {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: block;
+}
+
+/* opacity=0 when removing "active" class */
+.tab-animation > .tab-content > .tab-pane.active-remove-active {
+    opacity: 0;
+}
+
+/* opacity=0 when adding "active" class */
+.tab-animation > .tab-content > .tab-pane.active-add {
+    opacity: 0;
+}
+/*ANIMATION TABS end*/
+
+/*THUMBNAILS*/
+
+ul.thumbnails, form {
+	margin-top: 15px;
+}
+
+ul.thumbnails > li {
+	list-style: none;
+}
+
+.thumbnail {
+  padding: 0px;
+}
+
+.thumbnail > h3, 
+.thumbnail > p {
+	padding: 0px 20px;
+}
+
+.thumbnail > h3 {
+	margin-bottom: 0;
+}
+
+/*PANNELS*/
+
+.panel-default {
+	border-color: transparent;
+}
+
+.panel-default > .panel-heading {
+	color: white !important;
+	background-color: #67809F;
+	border-color: #67809F;
+	border-radius: 3px;
+}
+
+.panel-title > a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.panel-body label {
+	color: #34495E;
+}

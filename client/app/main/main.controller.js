@@ -2,77 +2,50 @@
 
 angular.module('bookClubApp')
   .controller('MainCtrl', 
-    function ($scope, $window, $http, Auth, $location, $route) {
+    function ($scope, Auth, $location) {
 
-    $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
-    //User Variables
-    $scope.userLogin = {};
+    $scope.isLoggedIn = Auth.isLoggedIn();  
     $scope.user = {};
+    $scope.regUser = {};
     $scope.errors = {};
-    $scope.books = {};
-
-    $scope.loadBooks = function () {
-      $http.get('/api/books/').success(function(res){
-        $scope.books = res;
-        console.log("books loaded!");
-      }).error(function(err){
-        console.log(err);
-      });
-    }
-
-    //Alert object
-    $scope.alerts=[];
-
-    //Book model data
-    $scope.bookData = {
-      name:'',
-      author:'',
-      img: ''
-    }
-
-    //Alert functions
-    $scope.bookAddAlert = function() {
-      $scope.alerts.push({type: 'success', msg: $scope.bookData.name+' added!'});
-      console.log(alerts);
+    $scope.open = {
+      login: true,
+      reg: false
     };
-    $scope.closeAlert = function(index) {
-      $scope.alerts.splice(index, 1);
-    };
-
 
     $scope.login = function(form) {
       $scope.submitted = true;
 
       if(form.$valid) {
         Auth.login({
-          email: $scope.userLogin.email,
-          password: $scope.userLogin.password
+          email: $scope.user.email,
+          password: $scope.user.password
         })
-        .then( function() {
+        .then(function() {
           // Logged in, redirect to home
-          $location.path('/');
+          $location.path('/home');
         })
-        .catch( function(err) {
+        .catch(function(err) {
+          $scope.user = {};
+          $scope.errors = {};
           $scope.errors.other = err.message;
         });
       }
-      $scope.userLogin = {};
     };
 
     $scope.register = function(form) {
       $scope.submitted = true;
 
-      if(form.$valid && $scope.user.password == $scope.user.passwordVerify) {
+      if(form.$valid && $scope.regUser.password == $scope.regUser.passwordVerify) {
         Auth.createUser({
-          name: $scope.user.name,
-          email: $scope.user.email,
-          password: $scope.user.password
+          name: $scope.regUser.name,
+          email: $scope.regUser.email,
+          password: $scope.regUser.password
         })
         .then( function() {
+          $scope.regUser = {};
           // Account created, redirect to home
-          $location.path('/');
+          $location.path('/home');
         })
         .catch( function(err) {
           err = err.data;
@@ -85,31 +58,5 @@ angular.module('bookClubApp')
           });
         });
       }
-      $scope.user = {};
     };
-
-    $scope.addBook = function() {
-      $http.post('/api/books/', {
-        _id: $scope.bookData.name,
-        author: $scope.bookData.author,
-        contributor: $scope.getCurrentUser().name,
-        image: $scope.bookData.img
-      }).success(function(res){
-        $scope.alerts.push({type: 'success', msg: $scope.bookData.name+' added!'});
-        console.log(res + ' submitted!');
-        //Reset scope variable
-        $scope.bookData = {
-          name:'',
-          author:'',
-          img: ''
-        }
-      }).error(function(err) {
-        console.log(err);
-      });
-      $scope.loadBooks();
-    };
-
-    //Login load: Get books from db
-    $scope.loadBooks();
-
   });
