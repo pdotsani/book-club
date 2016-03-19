@@ -12,10 +12,18 @@ angular.module('bookClubApp')
           controller:'password'
         }
       },
+
       get: {
         method: 'GET',
         params: {
           id:'me'
+        }
+      },
+
+      update: {
+        method: 'PUT',
+        params: {
+          controller:'update'
         }
       }
 	  });

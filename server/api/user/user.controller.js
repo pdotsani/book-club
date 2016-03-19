@@ -4,6 +4,7 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var _ = require('lodash');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -81,19 +82,23 @@ exports.changePassword = function(req, res, next) {
 
 /* Change profile properties */
 exports.update = function(req, res, next) {
-  var userId = req.body.id;
-  var newCity = req.body.city;
-  var newState = req.body.state;
-  var newFullName = req.body.fullName;
+  console.log(req.body);
+  var update = {
+    city: req.body.city,
+    state: req.body.state,
+    fullname: req.body.fullName
+  }
 
-  User.findById(userId, function (err, user) {    
-      user.city = newCity;
-      user.markModified('city');
-      user.save(function(err) {
-        if (err) return validationError(res, err);
-        return res.send(200, user);
-      });
-  });
+  User.findById(req.body.id, function(err, user) {
+    if(err) return handleError(res, err);
+    if(!user) return res.send(404);
+    var updated = _.merge(user, update);
+    console.log(updated);
+    updated.save(function(err) {
+      if (err) return validationError(res, err);
+      return res.send(200, user);
+    });
+  })
 };
 
 /**

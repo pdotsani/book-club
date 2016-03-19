@@ -3,28 +3,25 @@
 angular.module('bookClubApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
-    $scope.user = {};
+    $scope.profile = {};
 
     $scope.updateProfile = function(form) {
       $scope.submitted = true;
-
-      console.log($scope.user.fullName + 
-        ':' + $scope.user.city + 
-        ':' + $scope.user.state);
       
       var obj = {};
+      obj.id = Auth.getCurrentUser()._id;
       // Run user service... only submit if value exists
-      obj.city = $scope.user.city 
-        ? $scope.user.city : delete obj.city;
-      obj.state = $scope.user.state 
-        ? $scope.user.state : delete obj.state;
-      obj.fullName = $scope.user.fullName 
-        ? $scope.user.fullName : delete obj.fullName;
+      obj.city = $scope.profile.city 
+        ? $scope.profile.city : undefined;
+      obj.state = $scope.profile.state 
+        ? $scope.profile.state : undefined;
+      obj.fullName = $scope.profile.fullName 
+        ? $scope.profile.fullName : undefined;
 
-      User.update(obj, function() {
-        $scope.user = {};
-        $scope.password.message = 'Profile Updated!';
-      }).catch(function(err) {
+      User.update({}, obj, function() {
+        $scope.profile = {};
+        $scope.message = 'Profile Updated!';
+      }, function(err) {
         console.warn(err);
       });
     };
@@ -33,8 +30,8 @@ angular.module('bookClubApp')
       $scope.submitted = true;
       if(form.$valid) {
         Auth.changePassword(
-          $scope.user.oldPassword, 
-          $scope.user.newPassword)
+          $scope.profile.oldPassword, 
+          $scope.profile.newPassword)
         .then(function() {
           $scope.password.message = 'Password changed!';
         })

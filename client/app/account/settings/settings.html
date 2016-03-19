@@ -11,21 +11,33 @@
         ng-submit="updateProfile(profileForm)"
         novalidate>
 
-        <p class="help-block"> {{ profile.message }} </p>
+        <p class="help-block text-center" style="color:green;"> {{ message }} </p>
 
         <div class="form-group">
           <label>Full Name</label>
-          <input type="text" name="fullName" class="form-control" ng-model="user.fullName">
+          <input 
+            type="text" 
+            name="fullName" 
+            class="form-control" 
+            ng-model="profile.fullName">
         </div>
         
         <div class="form-group">
           <label>City</label>
-          <input type="text" name="city" class="form-control" ng-model="user.city">
+          <input 
+            type="text" 
+            name="city" 
+            class="form-control" 
+            ng-model="profile.city">
         </div>
 
         <div class="form-group">
           <label>State</label>
-          <input type="text" name="state" class="form-control" ng-model="user.state">
+          <input 
+            type="text" 
+            name="state" 
+            class="form-control" 
+            ng-model="profile.state">
         </div>
 
         <button
@@ -42,24 +54,32 @@
         <div class="form-group">
           <label>Change Password</label>
 
-          <input type="password" name="password" class="form-control" ng-model="user.oldPassword"  placeholder="Current password"
-                 mongoose-error/>
+          <input 
+            type="password" 
+            name="password" 
+            class="form-control" 
+            ng-model="profile.oldPassword"  
+            placeholder="Current password"
+            mongoose-error/>
           <p class="help-block" ng-show="form.password.$error.mongoose">
               {{ errors.other }}
           </p>
         </div>
 
         <div class="form-group">
-          <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword" placeholder="New password"
-                 ng-minlength="3"
-                 required/>
+          <input 
+            type="password" 
+            name="newPassword" 
+            class="form-control" 
+            ng-model="profile.newPassword" 
+            placeholder="New password"
+            ng-minlength="3"
+            required/>
           <p class="help-block"
              ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
             Password must be at least 3 characters.
           </p>
         </div>
-
-        <p class="help-block"> {{ password.message }} </p>
 
         <button
           class="btn btn-default"
