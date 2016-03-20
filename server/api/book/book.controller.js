@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Book = require('./book.model');
+var mongoose = require('mongoose');
 
 // Get list of books
 exports.index = function(req, res) {
@@ -22,6 +23,7 @@ exports.show = function(req, res) {
 
 // Creates a new book in the DB.
 exports.create = function(req, res) {
+  console.log(req.body);
   Book.create(req.body, function(err, book) {
     if(err) { return handleError(res, err); }
     return res.json(201, book);
@@ -44,7 +46,7 @@ exports.update = function(req, res) {
 
 // Deletes a book from the DB.
 exports.destroy = function(req, res) {
-  Book.findById(req.params.id, function (err, book) {
+  Book.findById(req.body.id, function (err, book) {
     if(err) { return handleError(res, err); }
     if(!book) { return res.send(404); }
     book.remove(function(err) {

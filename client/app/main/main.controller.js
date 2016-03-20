@@ -36,7 +36,8 @@ angular.module('bookClubApp')
     $scope.register = function(form) {
       $scope.submitted = true;
 
-      if(form.$valid && $scope.regUser.password == $scope.regUser.passwordVerify) {
+      if(form.$valid && 
+        $scope.regUser.password === $scope.regUser.passwordVerify) {
         Auth.createUser({
           name: $scope.regUser.name,
           email: $scope.regUser.email,

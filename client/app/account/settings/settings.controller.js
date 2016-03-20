@@ -5,18 +5,18 @@ angular.module('bookClubApp')
     $scope.errors = {};
     $scope.profile = {};
 
-    $scope.updateProfile = function(form) {
+    $scope.updateProfile = function() {
       $scope.submitted = true;
       
       var obj = {};
       obj.id = Auth.getCurrentUser()._id;
       // Run user service... only submit if value exists
-      obj.city = $scope.profile.city 
-        ? $scope.profile.city : undefined;
-      obj.state = $scope.profile.state 
-        ? $scope.profile.state : undefined;
-      obj.fullName = $scope.profile.fullName 
-        ? $scope.profile.fullName : undefined;
+      obj.city = $scope.profile.city ?
+        $scope.profile.city : undefined;
+      obj.state = $scope.profile.state ?
+        $scope.profile.state : undefined;
+      obj.fullName = $scope.profile.fullName ?
+        $scope.profile.fullName : undefined;
 
       User.update({}, obj, function() {
         $scope.profile = {};
