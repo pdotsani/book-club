@@ -66,7 +66,6 @@ angular.module('bookClubApp')
             $scope.loadBooks();
         } else {
             // raise error...
-            console.warn(err);
         }
     };
 
