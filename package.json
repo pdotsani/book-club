@@ -84,7 +84,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "postinstall": "grunt build:dist",
+    "postinstall": "npm install --only=dev && grunt build:dist",
     "start": "node server/app.js",
     "test": "grunt test",
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
