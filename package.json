@@ -81,7 +81,8 @@
     "phantomjs-prebuilt" : ">=1.9"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=5.9.0",
+    "npm" : ">=3.7.3"
   },
   "scripts": {
     "postinstall": "grunt build",
